@@ -1,5 +1,21 @@
-README for bMotion
-------------------
+# bMotion
+
+An "Artificial stupidity" plugin for eggdrop, with support for factoids, and annoying entire channels at once quickly.
+
+## this is a FORK!
+
+this is a fork of the original bmotion, intended to possibly go a separate direction with the core ideas of the code. you have been warned. 
+
+this fork maintained by [rglx](<../../../../rglx/>).
+
+## [contributions welcome](<../../issues>)
+
+especially revolving around some of the plugins and abstracts that are ... let's just say "dated"
+
+---------------------------------------
+
+# Original README for bMotion
+## bMotion
 
 http://www.bmotion.net
 
@@ -18,8 +34,7 @@ Have fun!
 James "Off" Seward
 Developer, bMotion
 
----------------------------------------------------------------------
-HOW TO INSTALL
+## Installation
 
 Please see https://github.com/jamesoff/bmotion/wiki/Installing for 
 details on how to install bMotion.
@@ -28,8 +43,7 @@ You can also launch an AWS instance with bMotion and eggdrop pre-
 installed. It's AMI ami-0d2bee7a in eu-west-1. Fire it up and log in
 as 'ubuntu'. The MOTD has instructions.
 
----------------------------------------------------------------------
-FEEDBACK
+## Feedback
 
 Please bring feedback (positive and negative) to #bmotion on EFNet, or
 you can mail me at james@bmotion.net
