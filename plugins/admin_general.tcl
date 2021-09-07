@@ -309,18 +309,13 @@ proc bMotion_plugin_management_interbot { handle { text "" } } {
 
 proc bMotion_plugin_management_interbot_help { } {
 	bMotion_putadmin "Manage the interbot communication stuff."
-	bMotion_putadmin "	.bmotion interbot next #channel"
-	bMotion_putadmin "		Report the next bot for #channel"
-	bMotion_putadmin "	.bmotion interbot elect #channel"
-	bMotion_putadmin "		Force an election for #channel"
-	bMotion_putadmin "	.bmotion interbot bots #channel"
-	bMotion_putadmin "		Report bots discovered in #channel"
-	bMotion_putadmin "	.bmotion interbot enable"
-	bMotion_putadmin "	.bmotion interbot disable"
-	bMotion_putadmin "		Enable/disable interbot stuff entirely"
+	bMotion_putadmin "	.bmotion interbot next #channel - Report the next bot for #channel"
+	bMotion_putadmin "	.bmotion interbot elect #channel - Force an election for #channel"
+	bMotion_putadmin "	.bmotion interbot bots #channel - Report bots discovered in #channel"
+	bMotion_putadmin "	.bmotion interbot <enable/disable> - Enable/disable interbot stuff entirely"
 }
 
-# um
+# report the status of our flux capacitors [very important]
 proc bMotion_plugin_management_flux { handle { text "" } } {
 	if {[string match "*off*" $text]} {
 		bMotion_putadmin "i call it... MISTAR FUSION!"
@@ -356,10 +351,8 @@ proc bMotion_plugin_management_away { handle { text "" } } {
 
 proc bMotion_plugin_management_away_help { } {
 	bMotion_putadmin "Check and adjust the bot's away status"
-	bMotion_putadmin "  .bmotion away"
-	bMotion_putadmin "    Show if the bot is away or not"
-	bMotion_putadmin "  .bmotion away off"
-	bMotion_putadmin "    Make the bot be not-away"
+	bMotion_putadmin "  .bmotion away - Show if the bot is away or not"
+	bMotion_putadmin "  .bmotion away off - Make the bot be not-away"
 }
 
 proc bMotion_plugin_management_debug { handle { text "" } } {
@@ -402,10 +395,5 @@ proc bMotion_plugin_management_debug { handle { text "" } } {
 
 proc bMotion_plugin_management_debug_help { } {
 	bMotion_putadmin "Enable and disable debug mode on channels. Debug mode makes all plugins fire at 100% chance and disables flood checking."
-	bMotion_putadmin "  .bmotion debug"
-	bMotion_putadmin "    Check the status of debug mode"
-	bMotion_putadmin "  .bmotion debug on #channel"
-	bMotion_putadmin "    Enable debug on #channel"
-	bMotion_putadmin "  .bmotion debug off #channel"
-	bMotion_putadmin "    Disable debug on #channel"
-}
+	bMotion_putadmin "  .bmotion debug - Check the status of debug mode"
+	bMotion_putadmin "  .bmotion debug \[on/off\] #channel - Toggle debug on #channel"

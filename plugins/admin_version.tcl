@@ -14,7 +14,7 @@
 proc bMotion_plugin_management_version { handle { arg "" } } {
   global bMotionVersion
 
-	bMotion_putadmin "bMotion $bMotionVersion -- http://www.bmotion.net"
+	bMotion_putadmin "bMotion $bMotionVersion"
 
   return 0
 }
