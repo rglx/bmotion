@@ -2,3 +2,6 @@
 *.swp
 tests/output.txt
 tags
+local/abstracts
+local/facts
+local/karma.txt
