@@ -183,6 +183,10 @@ set bMotionSettings(ignorefacts) "is online"
 # seconds per character in line
 set bMotionSettings(typingSpeed) 0.05
 
+# enable complex_respondall plugin's functionality?
+# (in essence, if the bot nick is in a string and it isn't matched by any of our other plugins, just do something random)
+set bMotionSettings(respondAllEnabled) 0
+
 # use the interbot stuff?
 # by default, bMotion will broadcast on the botnet to find other bMotions
 # so that it can talk to them (when they're in the same channel)
