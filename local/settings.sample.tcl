@@ -1,5 +1,5 @@
-#/usr/bin/env tcl8
-# EDIT THIS AND MOVE IT TO settings.tcl
+#!/usr/bin/env tclsh
+# eh, it was a good try
 
 # bMotion - Settings file
 #
@@ -43,10 +43,10 @@
 #
 # It's SO you!
 
-# male or female [important]
+# male, female, nonbinary, or agender/none [important]
 set bMotionInfo(gender) "male"
 
-# straight, gay, or bi [important]
+# straight, gay/lesbian, bi, or pan/any [important]
 set bMotionInfo(orientation) "straight"
 
 # are we a zim or a gir or a moose [important]
