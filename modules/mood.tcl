@@ -361,14 +361,10 @@ proc bMotion_mood_get { name } {
 # management help callback
 proc bMotion_mood_admin_help { } {
 	bMotion_putadmin "Controls the mood system:"
-	bMotion_putadmin "  .bmotion mood [status]"
-	bMotion_putadmin "    View a list of all moods and their values"
-	bMotion_putadmin "  .bmotion mood set <name> <value>"
-	bMotion_putadmin "    Set mood <name> to <value>. The neutral value is usually 0. Max/min is (-)30."
-	bMotion_putadmin "  .bmotion mood drift"
-	bMotion_putadmin "    Runs a mood tick."
-	bMotion_putadmin "  .bmotion mood info"
-	bMotion_putadmin "    Shows internal mood configuration"
+	bMotion_putadmin ".bmotion $botnick mood status - View a list of all moods and their values"
+	bMotion_putadmin ".bmotion $botnick mood set <mood> <number> - Sets a mood to <value>."
+	bMotion_putadmin ".bmotion $botnick mood drift - Runs a mood tick."
+	bMotion_putadmin ".bmotion $botnick mood info - Shows internal mood configuration"
 }
 
 if {$bMotion_testing == 0} {

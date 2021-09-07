@@ -27,20 +27,24 @@
 #General IRC events 
 bind join - *!*@* bMotion_event_onjoin
 bind mode - * bMotion_event_mode
-bind pubm - * bMotion_event_main
 bind sign - * bMotion_event_onquit
 bind nick - * bMotion_event_nick
 bind part - * bMotion_event_onpart
+bind pubm - * bMotion_event_main
 bind ctcp - ACTION bMotion_event_action
 
 #bMotion IRC events 
-bind pub - "!mood" pubm_moodhandler
-bind pub - "!bminfo" bMotionInfo
-bind pub - "!bmstats" bMotionStats
-bind msg - bmotion msg_bmotioncommand
-bind pub - !bmadmin bMotionAdminHandler
-bind pub - !bmotion bMotionAdminHandler2
-bind pub - .bmotion bMotionAdminHandler2
+bind pub - ".mood" pubm_moodhandler
+bind pub - ".bminfo" bMotionStats
+bind pub - ".bmstats" bMotionStats
+#bind pub n ".bmadmin" bMotionAdminHandler
+bind pub n ".bmotion" bMotionAdminHandler2
+
+bind msg - ".mood" "convertToMsgBind pubm_moodhandler"
+bind msg - ".bminfo" "convertToMsgBind bMotionStats"
+bind msg - ".bmstats" "convertToMsgBind bMotionStats"
+#bind msg n ".bmadmin" "convertToMsgBind bMotionAdminHandler"
+bind msg n ".bmotion" "convertToMsgBind bMotionAdminHandler2"
 
 #DCC commands 
 bind dcc m mood moodhandler
@@ -49,7 +53,7 @@ bind dcc m bmadmin* bMotion_dcc_command
 bind dcc m bmhelp bMotion_dcc_help
 
 #bedtime
-bind time - "* * * * *" bMotion_check_tired2
+bind time - "5 * * * *" bMotion_check_tired2
 
 #
 # rebuilds our channel list based on which channels are +bmotion
@@ -81,8 +85,7 @@ foreach chan $bMotionChannels {
 proc bMotionStats {nick host handle channel text} {
 	global bMotionInfo botnicks bMotionSettings cvsinfo botnick
 	global bMotionVersion
-	if {(![regexp -nocase $botnick $text]) && ($text != "all")} { return 0 }
-	if {!([isvoice $nick] || [isop $nick]) || ($nick != "JamesOff")} { return 0 }
+	# if {(![regexp -nocase $botnick $text]) && ($text != "all")} { return 0 }
 
 
 	global bMotion_abstract_contents bMotion_abstract_timestamps bMotion_abstract_max_age
@@ -99,8 +102,7 @@ proc bMotionStats {nick host handle channel text} {
 		incr factcount [llength $bMotionFacts($item)]
 	}
 
-	putchan $channel "abstracts: [expr $mem + $disk] total, $mem loaded, $disk on disk"
-	putchan $channel "facts: $factcount facts about $itemcount items"
+	puthelp "NOTICE $channel :bMotion statistics - abstracts: [expr $mem + $disk] total, $mem loaded, $disk on disk - facts: $factcount facts about $itemcount items"
 }
 
 #
@@ -581,7 +583,7 @@ proc bMotion_dcc_command { handle idx arg } {
 		return 1
 	}
 
-	set blah [split $info "¦"]
+	set blah [split $info "\A6"]
 	set flags [lindex $blah 0]
 	set callback [lindex $blah 1]
 
@@ -705,7 +707,7 @@ proc bMotion_putadmin { text } {
 
 	if {$output == "irc"} {
 		set target [bMotion_plugins_settings_get "admin" "target" "" ""]
-		puthelp "PRIVMSG $target :$text"
+		puthelp "NOTICE $target :$text"
 		return 0
 	}
 	return 0
@@ -922,9 +924,9 @@ proc bMotion_cleanNick { nick { handle "" } } {
 }
 
 ### bMotion_uncolen 
-# clean out $£(($ off the end
+# clean out $\A3(($ off the end
 proc bMotion_uncolen { line } {
-	regsub -all {([!\"\£\$\%\^\&\*\(\)\#\@]{3,})} $line "" line
+	regsub -all {([!\"\\A3\$\%\^\&\*\(\)\#\@]{3,})} $line "" line
 	return $line
 }
 

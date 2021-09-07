@@ -25,7 +25,6 @@ source "$bMotionModules/leet_settings.tcl"
 
 # Binds
 bind pub - "!leet" bMotionLeetChannel
-bind msg - leet leetPrivate
 
 proc bMotionLeetChannel {nick host handle channel text} {
   global botnick bMotionInfo
@@ -107,30 +106,3 @@ proc makeLeet2 {line} {
 }
 
 #end of makeleet2
-
-proc leetPrivate {nick host handle arg} {
-  #set handle [finduser $host]
-  if {$handle == "*"} {
-    return 0
-  }
-  if [regexp {(\[#!\]\w+) (.+)} $arg ming channel param] {
-    set val [makeLeet2 $param]
-    putlog "bMotion: $nick asked !$param! to be leeted to !$channel!"
-    if {![botonchan $channel]} {
-      puthelp "PRIVMSG $nick :Sorry, I'm not on $channel"
-      return 0
-    }
-    if {![onchan $nick $channel]} {
-      set name [bMotionTransformNick $nick $nick $host]
-      puthelp "PRIVMSG $nick :I'm sorry $name, I can't do that."
-      putlog "bMotion: ALERT! $nick failed query leet to $channel ($param)."
-      return 0
-    }
-    puthelp "PRIVMSG [chandname2name $channel] :\[\002$nick\002\] $val"
-    return 0
-  }
-
-  putlog "bMotion: $nick asked !$arg! to be leeted"
-  puthelp "PRIVMSG $nick :[makeLeet2 $arg]"
-  return 0
-}

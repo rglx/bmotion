@@ -121,7 +121,7 @@ proc bMotion_plugin_complex_startrek_courtmartial { nick host handle channel tex
       bMotionDoAction $channel $who "Rules simple. Simply decide if you think I'll find %% innocent."
       set bMotionInfo(brigInnocent) [list]
       set bMotionInfo(brigGuilty) [list]
-      bind pub - "!bet" bMotionVoteHandler
+      bind pubm - "!bet" bMotionVoteHandler
       bMotionDoAction $channel $who "Place bets now! (\002!bet innocent\002 and \002!bet guilty\002, one bet per person)"
     }
     bMotionDoAction $channel $who "/throws %% in the brig to await charges"
@@ -210,7 +210,7 @@ proc bMotionVoteHandler {nick host handle channel text} {
 	if {$nick == ""} {
     #unbind
     putlog "bMotion: Oops, need to unbind votes"
-    unbind pub - "!bet" bMotionVoteHandler
+    unbind pubm - "/bet" bMotionVoteHandler
     return 0
   }
 
