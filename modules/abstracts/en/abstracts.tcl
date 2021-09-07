@@ -112,7 +112,7 @@ bMotion_abstract_register "chocolates" {
 	"twix"
 	"toffee crisp"
 	"crunchie"
-	"Yorkie - it's not for girls"
+	"Yorkie"
 	"smarties"
 	"cadburys buttons"
 	"edible panties"
@@ -313,7 +313,7 @@ bMotion_abstract_register "answerWhys" {
 }
 
 bMotion_abstract_register "answerWhys_male" {
-	"Because it's on the tip of my foreskin."
+	"Because it's on the tip of my tongue."
 }
 
 bMotion_abstract_register "cities" {
@@ -1150,13 +1150,7 @@ bMotion_abstract_register "lostPlot" {
 }
 
 bMotion_abstract_register "hugs" {
-	"*hugs %%*"
-	"/huggles %%"
-	"/snuggles %%"
-	"*snuggles %%*"
-	"/huggles with %%"
-	"/squeezes %%"
-	"/snoofles %%"
+	"/hugs %%"
 }
 
 bMotion_abstract_register "hides" {
@@ -1482,13 +1476,7 @@ bMotion_abstract_register "loveresponses_male" {
 }
 
 bMotion_abstract_register "hugs" {
-	"*hugs %%*"
-	"/huggles %%"
-	"/snuggles %%"
-	"*snuggles %%*"
-	"/huggles with %%"
-	"/squeezes %%"
-	"/snoofles %%"
+	"/hugs %%"
 }
 
 bMotion_abstract_register "upyourbums" {
@@ -1544,23 +1532,18 @@ bMotion_abstract_register "prom_first" {
 	"pissy"
 	"weiner"
 	"pap"
-	"fag"
 	"poop"
 	"special"
 	"prick"
 	"bastard"
 	"bitch"
-	"tranny"
-	"whore"
 	"toss"
-	"bender"
 	"vomit"
 	"sausage"
 	"asshole"
 	"tit"
 	"twat"
 	"puke"
-	"gypsy"
 	"bollock"
 	"dog"
 	"bog"
@@ -1571,6 +1554,8 @@ bMotion_abstract_register "silences" {
 	"Enough"
 	"Silence!"
 	"%colen"
+	"%colen"
+	"%colen%colen"
 	"no more!"
 	"NNK"
 	"Shhh"
@@ -1668,7 +1653,6 @@ bMotion_abstract_register "prom_second" {
 	"alley"
 	"stirrer"
 	"cellist"
-	"pimp"
 	"trumpet"
 	"cheese"
 	"artist"
@@ -4406,7 +4390,7 @@ bMotion_abstract_register "answerHowBigs" {
 	"about as big as %VAR{sillyThings}"
 	"about as small as %VAR{sillyThings}"
 	"%NUMBER{200} inches"
-	"%NUMBER{100} metres"
+	"%NUMBER{100} meters"
 	"%NUMBER{50} miles"
 }
 
@@ -4815,7 +4799,7 @@ bMotion_abstract_add_filter "captains_log_sensible" "sillythings"
 
 bMotion_abstract_register "captains_log_silly" {
 	"My pants are really chafing."
-	"Meanwhile the replicators are only making decaff %VAR{unsmiles}"
+	"Meanwhile, the replicators are only making decaf %VAR{unsmiles}"
 	"My sonic shower is stuck playing %VAR{randomSongName}"
 	"Still unable to explain lack of toilet facilities here."
 	"%ruser{enemy} is spending a suspiciously large amount of time on the holodeck."

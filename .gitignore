@@ -5,3 +5,4 @@ tags
 local/abstracts
 local/facts
 local/karma.txt
+*.bak
