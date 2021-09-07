@@ -172,7 +172,7 @@ set bMotionInfo(brigDelay) 30
 set bMotionSettings(silenceTime) 5
 
 # languages to expect for plugins
-set bMotionSettings(languages) "en,nl"
+set bMotionSettings(languages) "en"
 
 # default language to use
 set bMotionInfo(language) "en"
