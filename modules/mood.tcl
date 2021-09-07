@@ -268,12 +268,14 @@ proc bMotion_mood_admin { handle { arg "" } } {
 
 	if {($arg == "") || ($arg == "status")} {
 		#output our mood
-		bMotion_putadmin "Current mood status:"
+		set returnedString "Current mood status"
 		set names [array names bMotion_moods]
+
 		foreach mood $names {
 			set value [lindex $bMotion_moods($mood) $BMOTION_MOOD_VALUE]
-			bMotion_putadmin "  $mood: $value"
+			append returnedString " - $mood: $value"
 		}
+		bMotion_putadmin $returnedString
 		return 0
 	}
 
