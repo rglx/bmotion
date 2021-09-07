@@ -1,3 +1,4 @@
+#/usr/bin/env tcl8
 # EDIT THIS AND MOVE IT TO settings.tcl
 
 # bMotion - Settings file
@@ -47,6 +48,10 @@ set bMotionInfo(gender) "male"
 
 # straight, gay, or bi [important]
 set bMotionInfo(orientation) "straight"
+
+# are we a zim or a gir or a moose [important]
+set bMotionInfo(invadertype) "zim"
+
 
 # list of nicks to respond to, separate with the | character [important]
 # regexp is ok, but don't use brackets of any sort: () [] {} <-- NO

@@ -85,45 +85,25 @@ set bMotion_loaded_settings_from [list]
 
 # try the original location first
 set bMotion_loaded_settings 0
-if [file exists "$bMotionModules/settings.tcl"] {
-	source "$bMotionModules/settings.tcl"
-	bMotion_putloglev d * "loaded settings from modules directory"
-	set bMotion_loaded_settings 1
-	lappend bMotion_loaded_settings_from "$bMotionModules/settings.tcl"
-}
 
-#try to load from the local dir
-if [file exists "$bMotionLocal/settings.tcl"] {
+catch {
 	source "$bMotionLocal/settings.tcl"
-	bMotion_putloglev d * "loaded local settings from $bMotionLocal/settings.tcl"
-	set bMotion_loaded_settings 1
+	bMotion_putloglev d * "loaded global settings from settings.tcl"
+	# we should have the global settings in a single file, with all the unique personality items in the bot-specific file.
+	#set bMotion_loaded_settings 1
 	lappend bMotion_loaded_settings_from "$bMotionLocal/settings.tcl"
 }
-
-#try to load a file for this bot
 catch {
-  if {${botnet-nick} != ""} {
-    source "$bMotionModules/settings_${botnet-nick}.tcl"
-    bMotion_putloglev d * "loaded settings for this bot from settings_${botnet-nick}.tcl"
-		set bMotion_loaded_settings 1
-		lappend bMotion_loaded_settings_from "$bMotionModules/settings_${botnet-nick}.tcl"
-  }
-}
-
-#try to load a file for this bot
-catch {
-  if {${botnet-nick} != ""} {
-    source "$bMotionLocal/settings_${botnet-nick}.tcl"
-    bMotion_putloglev d * "loaded settings for this bot from settings_${botnet-nick}.tcl"
-		set bMotion_loaded_settings 1
-		lappend bMotion_loaded_settings_from "$bMotionLocal/settings_${botnet-nick}.tcl"
-  }
+	source "$bMotionLocal/settings_${botnet-nick}.tcl"
+	bMotion_putloglev d * "loaded settings for this bot from settings_${botnet-nick}.tcl"
+	set bMotion_loaded_settings 1
+	lappend bMotion_loaded_settings_from "$bMotionLocal/settings_${botnet-nick}.tcl"
 }
 
 if {$bMotion_loaded_settings == 0} {
 	putlog "bMotion: FATAL! Could not load from any settings file! bMotion is not going to work! :("
 	putlog "bMotion: Aborting script startup"
-	putlog "bMotion: Hint: mkdir -p local && cp modules/settings.sample.tcl local/settings.tcl"
+	putlog "bMotion: hint: look in $bMotionLocal/ :)"
 	return
 }
 
