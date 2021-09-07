@@ -10,7 +10,6 @@
 # in the modules directory.
 ###############################################################################
 
-# bMotion_plugin_complex_invader_duty
 # specific Gir moment... whenever anyone says duty (or duty sounding word)
 # bMotion responds with some suitably random dootie phrase
 proc bMotion_plugin_complex_invader_duty { nick host handle channel text } {
@@ -21,69 +20,41 @@ proc bMotion_plugin_complex_invader_duty { nick host handle channel text } {
 	bMotionDoAction $channel "" "%VAR{randomDootie}"
 
 	# log this action
-	bMotion_putloglev d * "bMotion: (invader:duty) hehehe $nick said dootie"
+	bMotion_putloglev d * "bMotion: (invader:gir-duty) hehehe $nick said dootie"
 	return 1
 }
-# end bMotion_plugin_complex_invader_duty
 
-# bMotion_plugin_complex_invader_zim
-# general Invader Zim moments. will respond with random Invader Zim statement
-proc bMotion_plugin_complex_invader_zim { nick host handle channel text } {
-	global randomZimness botnick
+
+
+proc bMotion_plugin_complex_invader { nick host handle channel text } {
+	global randomGirness botnick randomZimness randomMinimoose bMotionInfo
 	if { ![bMotion_interbot_me_next $channel] } {
 		return 0
 	}
-	bMotionDoAction $channel "" "%VAR{randomZimness}"
+
+	# ah, the three genders
+	if { [bMotion_setting_get "invadertype"] == "zim" } {
+		bMotionDoAction $channel "" "%VAR{randomZimness}"
+	} elseif { [bMotion_setting_get "invadertype"] == "gir" } {
+		bMotionDoAction $channel "" "%VAR{randomGirness}"
+	} elseif { [bMotion_setting_get "invadertype"] == "moose" } {
+		bMotionDoAction $channel "" "%VAR{randomMinimoose}"
+	} else {
+		putlog "bMotion: (invader) uh oh, invadertype isnt set to something reasonable. doing nothing."
+		return 0
+	}
 
 	#log this action
-	bMotion_putloglev d * "bMotion: (invader:zim) $nick invoked the wrath of invader $botnick"
+	bMotion_putloglev d * "bMotion: (invader) saying something suitably insane"
 	return 1
 }
-# end bMotion_plugin_complex_invader_zim
 
-# bMotion_plugin_complex_invader_gir
-# general Gir moments, will respond with suitably insane Gir comment
-proc bMotion_plugin_complex_invader_gir { nick host handle channel text } {
-	global randomGirness botnick
-	if { ![bMotion_interbot_me_next $channel] } {
-		return 0
-	}
-	bMotionDoAction $channel "" "%VAR{randomGirness}"
-
-	#log this action
-	bMotion_putloglev d * "bMotion: (invader:gir) i like dootie"
-	return 1
-}
-# end bMotion_plugin_complex_invader_gir
-
-# bMotion_plugin_complex_invader_nick
-proc bMotion_plugin_complex_invader_nick { nick host handle channel newnick } {
-	if { ![bMotion_interbot_me_next $channel]} {
-		return 0
-	}
-
-	# check we haven't already done something for this nick
-	if { $nick == [bMotion_plugins_settings_get "complex:returned" "lastnick" $channel ""] } {
-		return 0
-	}
-
-	# check we haven't already done something for this nick
-	if { $nick == [bMotion_plugins_settings_get "complex:away" "lastnick" $channel ""] } {
-		return 0
-	}
-
-	# save as newnick because if they do a /me next it'll be their new nick
-	bMotion_plugins_settings_set "complex:away" "lastnick" $channel "" $newnick
-	bMotion_plugins_settings_set "complex:returned" "lastnick" $channel "" $newnick
-  	bMotionDoAction $channel $nick "%VAR{randomZimNameChange}"
-	return 1
-}
-# end bMotion_plugin_complex_invader_nick
+putlog "bmotion: invader plugin: registered procs"
 
 # random zimlike phrases
 bMotion_abstract_register "randomZimness" {
 	"yes, my tallest!"
-	"how can you have an operation impending doom %NUMBER{5} without me?"
+	"how can you have an operation impending doom %NUMBER{8} without me?"
 	"doom. doooom."
 	"shouldn't you be frying something?"
 	"but sir, we're still on our own planet"
@@ -98,7 +69,8 @@ bMotion_abstract_register "randomZimness" {
 	"I'll just have to wait for the skin to grow back on my eyeballs"
 	"I'll just have to wait for the skin to grow back on my %VAR{bodypart}"
 	"ow... my spine"
-	"mwahahahahahahahahahaha" 	"you lie... YOU LIEEEEEEE%colen"
+	"mwahahahahahahahahahaha"
+	"you lie... YOU LIEEEEEEE%colen"
 	"squealing fools%colen"
 	"we will begin by testing your absorbancy."
 	"invaders need no one... NO ONE%colen"
@@ -111,7 +83,8 @@ bMotion_abstract_register "randomZimness" {
 	"you! burger lord! how is this meat so clean... so pure?!"
 	"inferior human organs!"
 	"ow! my squealyspooch!"
-	"say, you're full of organs aren't you? and you wouldn't notice if you were missing a few?" 	"evaluation: PATHETIC%colen"
+	"say, you're full of organs aren't you? and you wouldn't notice if you were missing a few?"
+	"evaluation: PATHETIC%colen"
 	"Evaluation: LEMON FRESH%colen"
 	"Evaluation: %VAR{fruits:caps} FRESH%colen"
 	"surely that was no human bee!"
@@ -127,7 +100,8 @@ bMotion_abstract_register "randomZimness" {
 	"stupid silent glue boy"
 	"i will annihilate you down to your every last cell"
 	"i will be in my lab bathing in paste"
-	"i will be... LORD OF ALL HUMANS%colen" 	"i will rule you all with an iron fist"
+	"i will be... LORD OF ALL HUMANS%colen"
+	"i will rule you all with an iron fist"
 	"i will prepare food with my iron fist"
 	"%ruser... obey my fist"
 	"i am %me%colen"
@@ -141,10 +115,11 @@ bMotion_abstract_register "randomZimness" {
 	"the very thought of it make me... makes... little... sicky noises"
 	"i have a plan... an amazing plan"
 	"FOOLS! i am %me!"
-	"time for another amazing plan from me... %me!" 	"i have already stuffed my normal human belly with delicious human filth that i could not eat another bite"
+	"time for another amazing plan from me... %me!"
+	"i have already stuffed my normal human belly with delicious human filth that i could not eat another bite"
 	"ah! ah! THE MEAT!! THE HORRIBLE MEAT%colen"
 	"meats of evil! meat of EVIL%colen"
-	"is it a fair fight... is this moose weilding any projectile weapons?"
+	"is it a fair fight... is this moose wielding any projectile weapons?"
 	"i told you that you would would rue the day when you messed with %me... now begin your rueing... i'll just sit here and watch."
 	"dumb like a moose."
 	"the dogs! they're after my meat body of juicy bologna meats."
@@ -155,7 +130,8 @@ bMotion_abstract_register "randomZimness" {
 	"you will open your eyes... you have to breathe sometime"
 	"he is part of the collective now"
 	"please buy my candies or my little brother will go insane"
-	"they've locked down their fortress... with locks" 	"release me! release me or suffer the wrath of %me"
+	"they've locked down their fortress... with locks"
+	"release me! release me or suffer the wrath of %me"
 	"who *are* you people"
 	"rise up and use your revolting limbs to escape this prison"
 	"nothing can stop %me... nothing! not even this army of zombies!"
@@ -171,7 +147,8 @@ bMotion_abstract_register "randomZimness" {
 	"i have had enough of your smelly mouth filled with %VAR{fruits:plural}"
 	"as soon as my skeleton stops being broken i will destroy you"
 	"when will the lies end?!"
-	"wave of doom" 	"%ruser, you man the tractor beam, i'll pump the cows full of human sewage"
+	"wave of doom"
+	"%ruser, you man the tractor beam, i'll pump the cows full of human sewage"
 	"sometimes i'm afraid to find out what goes on in that insane head of yours"
 	"you dare tell me what i already know?!?!?!"
 	"curse you snacks... CURSE YOU%colen"
@@ -285,6 +262,14 @@ bMotion_abstract_register "randomGirness" {
 	"gue%REPEAT{2:7:s} who made waffles!"
 }
 
+# some minimoose stuff
+bMotion_abstract_register "randomMinimoose" {
+	"nyah! %VAR{smiles}"
+	"sque%REPEAT{4:12:e}!"
+	"/levitates"
+	"/glows for a second"
+	"e%REPEAT{1:5:e}eheeheehee!"
+}
 # random "duty" responses... inevitable Gir
 bMotion_abstract_register "randomDootie" {
 	"dootie %VAR{smiles}"
@@ -297,25 +282,10 @@ bMotion_abstract_register "randomDootie" {
 	"you said dootie %VAR{smiles}"
 }
 
-# random zim/gir name change responses
-bMotion_abstract_register "randomZimNameChange" {
-	"master, where did you go? I can't see you"
-	"master?"
-	"where'd my moose go?"
-	"we have no time for these games%colen"
-	"watch out for the moose"
-}
-
-# callbacks
+putlog "bmotion: invader plugin: registered abstracts"
 
 # "duty" plugin responds to "duty" and variations of "dootie"
-bMotion_plugin_add_complex "invader(duty)" "duty|doo+(t|d)(ie|y)" 20 "bMotion_plugin_complex_invader_duty" "en"
+bMotion_plugin_add_complex "invader(duty)" "duty|doo+(t|d)(ie|y)" 40 "bMotion_plugin_complex_invader_duty" "en"
 
 # "zim" plugin responds to "invade or invasion" "zim" "mwahahaha or hahaha" "victory for" "how dare" "you dare"
-bMotion_plugin_add_complex "invader(zim)" "zim|inva(de|sion)|((mwa)?ha(ha)+)|(victory for)|((you|how) dare)" 15 "bMotion_plugin_complex_invader_zim" "en"
-
-# "gir" plugin responds to "gir" "whooo or wooo" "chicken" "doom" "piggy", now with new improved "finally!
-bMotion_plugin_add_complex "invader(gir)" "w(h)?oo+|chicken|gir(!+| )|doo+m|piggy|finally!" 20 "bMotion_plugin_complex_invader_gir" "en"
-
-# nick change response
-bMotion_plugin_add_irc_event "invader(nick)" "nick" ".*" 5 "bMotion_plugin_complex_invader_nick" "en"
+bMotion_plugin_add_complex "invader(zim)" "w(h)?oo+|chicken|gir(!+| )|doo+m|piggy|finally!|zim|inva(de|sion)|((mwa)?ha(ha)+)|(victory for)|((you|how) dare)|mo+se|sque+" 40 "bMotion_plugin_complex_invader" "en"
