@@ -23,7 +23,7 @@ proc bMotion_plugin_complex_nipples { nick host handle channel text } {
   }
 }
 
-bMotion_abstract_register "nippes" {
+bMotion_abstract_register "nipples" {
     "YOU'RE %%? Feel these nipples!"
     "YOU'RE %%? Feel these %VAR{bodypart:plural}"
     "No, *I'm* %%"
