@@ -29,8 +29,7 @@ proc pickRandom { list } {
 	return [lindex $list [rand [llength $list]]]
 }
 
-#
-# get the pronoun for our gender
+# personal reflexive pronouns
 proc getPronoun {} {
 	bMotion_putloglev 5 * "getPronoun"
 	set gender [bMotion_setting_get "gender"]
@@ -42,14 +41,16 @@ proc getPronoun {} {
 		"female" {
 			return "herself"
 		}
+		"nonbinary" {
+			return "themself"
+		}
 		default {
 			return "its"
 		}
 	}
 }
 
-#
-# get "his" or "hers" for our gender
+# personal plural posessive pronouns
 proc getHisHers {} {
 	bMotion_putloglev 5 * "getHisHers"
 
@@ -62,14 +63,16 @@ proc getHisHers {} {
 		"female" {
 			return "hers"
 		}
+		"nonbinary" {
+			return "theirs"
+		}
 		default {
 			return "its"
 		}
 	}
 }
 
-#
-# get "her" or "her" for our gender
+# personal posessive pronouns
 proc getHisHer {} {
 	bMotion_putloglev 5 * "getHisHer"
 
@@ -82,14 +85,16 @@ proc getHisHer {} {
 		"female" {
 			return "her"
 		}
+		"nonbinary" {
+			return "their"
+		}
 		default {
 			return "it"
 		}
 	}
 }
 
-#
-# get "he" or "she" for our gender
+# subjective personal pronouns
 proc getHeShe {} {
 	bMotion_putloglev 5 * "getHeShe"
 
@@ -101,6 +106,9 @@ proc getHeShe {} {
 		}
 		"female" {
 			return "she"
+		}
+		"nonbinary" {
+			return "them"
 		}
 		default {
 			return "it"
@@ -494,7 +502,7 @@ proc bMotionInsertString {line swapout toInsert} {
 # Get random chars as would be made by shift-numberkeys
 proc bMotionGetColenChars {} {
 	bMotion_putloglev 5 * "bMotionGetColenChars"
-	set randomChar "!£$%^*@#~"
+	set randomChar "!&$%^*@#~"
 
 	set randomChars [split $randomChar {}]
 
